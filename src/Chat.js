@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
-import Message from './Message';
-import GetInput from './GetInput';
+import React, { useState, useEffect, useRef } from 'react';
+import Text from './Text';
+import Send from './Send';
 
-function ChatBox() {
+function Chat() {
   const [messages, setMessages] = useState([
     { text: 'This is a received message', type: 'received', time: '02:58 PM' },
     { text: 'This is a sent message', type: 'sent', time: '02:59 PM' }
   ]);
+
+  const messagesRef = useRef(null);
+  useEffect(() => {
+    messagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const addMessage = (text) => {
     const newMessage = {
@@ -24,12 +29,13 @@ function ChatBox() {
       </div>
       <div className="chat-messages">
         {messages.map((msg, index) => (
-          <Message key={index} text={msg.text} type={msg.type} time={msg.time} />
+          <Text key={index} text={msg.text} type={msg.type} time={msg.time} />
         ))}
+        <div ref={messagesRef} />
       </div>
-      <GetInput addMessage={addMessage} />
+      <Send addMessage={addMessage} />
     </div>
   );
 }
 
-export default ChatContainer;
+export default Chat;

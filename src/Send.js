@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function GetInput({ addMessage }) {
+function Send({ addMessage }) {
   const [input, setInput] = useState('');
 
   const handleSend = () => {
@@ -10,17 +10,25 @@ function GetInput({ addMessage }) {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault(); 
+      handleSend();
+    }
+  };
+
   return (
     <div className="chat-input">
       <input
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Type your message..."
       />
-      <button onClick={handleSend}>&#9658;</button>
+      <button onClick={handleSend}>&#10148;</button>
     </div>
   );
 }
 
-export default ChatInput;
+export default Send;

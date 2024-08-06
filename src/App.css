@@ -7,6 +7,7 @@
 
 body, html {
     height: 100%;
+    overflow: hidden;
 }
 
 .container {
@@ -16,15 +17,15 @@ body, html {
 
 .sidebar {
     width: 20%;
-    background-color: red;
+    background-color: #FF0000;
 }
 
 .chat-container {
     width: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background-color: #f0f0f0;
+    position: relative;
 }
 
 .chat-header {
@@ -38,31 +39,57 @@ body, html {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;/* REMOVE IF YOU WANT TO SCROLL UP (NOT MENTIONED IN THE CHALLENGE)*/
 }
 
 .message {
-    max-width: 70%;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    max-width: 75%;
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px; 
+    position: relative;
+    word-wrap: break-word; 
 }
 
 .received {
-    background-color: lightgreen;
+    background-color: #C5E9AE;
     align-self: flex-start;
+    margin-right: auto;
+    border-bottom-left-radius: 0; 
 }
 
 .sent {
-    background-color: lightblue;
+    background-color: #AFF9FE;
     align-self: flex-end;
+    margin-left: auto;
+    border-bottom-right-radius: 0; 
 }
 
 .timestamp {
-    display: block;
+    display: inline-block;
     font-size: 12px;
-    text-align: right;
     color: #666;
-    margin-top: 5px;
+    text-align: right;
+    position: absolute;
+    bottom: -25px; 
+    right: 10px;
+    white-space: nowrap; 
+}
+
+.received .timestamp {
+    left: 10px; 
+    right: auto; 
+    text-align: left; 
+    bottom: -20px;
+}
+
+.sent .timestamp {
+    right: 10px; 
+    left: auto; 
+    text-align: right; 
+    bottom: -20px;
 }
 
 .chat-input {
@@ -70,41 +97,53 @@ body, html {
     padding: 10px;
     background-color: white;
     border-top: 1px solid #ccc;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
 }
 
 .chat-input input {
     flex-grow: 1;
     padding: 10px;
     border: 1px solid #ccc;
+    border-color: white;
     border-radius: 5px;
     margin-right: 10px;
 }
 
 .chat-input button {
-    background-color: #007bff;
-    color: white;
+    background-color: white;
+    color: #1E68D7;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.chat-input button:hover {
-    background-color: #0056b3;
-}
-
-/* Responsive Design */
+/*MOBILE VIEW*/
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
     }
 
     .sidebar {
-        width: 100%;
-        height: 50px;
+        display: none;
     }
 
     .chat-container {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .chat-messages {
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+
+    .chat-input {
+        position: sticky;
+        bottom: 0;
     }
 }
