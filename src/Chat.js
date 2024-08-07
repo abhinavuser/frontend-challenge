@@ -25,7 +25,7 @@ function Chat() {
   return (
     <div className="chat-container">
       <div className="chat-header">
-        <h1>Your Registration Number</h1>
+        <h1>23BEE1128</h1>
       </div>
       <div className="chat-messages">
         {messages.map((msg, index) => (
